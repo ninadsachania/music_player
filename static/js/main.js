@@ -17,11 +17,6 @@ window.onload = function() {
     playButton.onclick = function() {
         if (audioPlayer.paused) {
             audioPlayer.play();
-            if ('mediaSession' in navigator) {
-                navigator.mediaSession.metadata = new MediaMetadate({
-                    title: songs[nowPlayingIndex].innerText,
-                });
-            }
             whiteOut();
             songs[nowPlayingIndex].style.backgroundColor = playingBackgroundColor;
         } else {
