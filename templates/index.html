@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <title>Music player</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+        }
+        .songs {
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #5f6769;
+            color: white;
+        }
+
+        .songs:hover {
+            background-color: #3c4245;
+        }
+
+        #container {
+            height: 500px;
+            width: fit-content;
+            background: #719192;
+            border-radius: 5px;
+            padding: 5px;
+            overflow: scroll;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="player" controls preload="auto"></audio>
+
+    <br>
+
+    <button id="play">Play/Pause</button>
+
+    <button id="next">Next</button>
+
+    <div id="container">
+        {% for song in songs %}
+            <p><div class="songs">{{ song }}</div></p>
+        {% endfor %}
+    </div>
+
+    <script src="{{ url_for('static', filename="js/main.js")}}"></script>
+</body>
+</html>
