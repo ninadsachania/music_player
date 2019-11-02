@@ -11,11 +11,23 @@ window.onload = function() {
 
     const songs = document.getElementsByClassName('songs');
 
-    /* load the first song into the audio player */
-    audioPlayer.src = `/static/playlist/${songs[nowPlayingIndex].innerText}`;
+    /* if localStorage['currentPlayingIndex'] exists load that */
+    if (localStorage['currentlyPlayingIndex']) {
+        const index = parseInt(localStorage['currentlyPlayingIndex']);
+
+        console.log(`${index} is the index.`);
+        nowPlayingIndex = index;
+        audioPlayer.src = `/static/playlist/${songs[nowPlayingIndex].innerText}`;
+    } else {
+        /* load the first song into the audio player */
+        audioPlayer.src = `/static/playlist/${songs[nowPlayingIndex].innerText}`;
+    }
 
     playButton.onclick = function() {
         if (audioPlayer.paused) {
+            if ('localStorage' in window && window['localStorage'] !== null) {
+                localStorage['currentlyPlayingIndex'] = nowPlayingIndex;
+            }
             audioPlayer.play();
             whiteOut();
             songs[nowPlayingIndex].style.backgroundColor = playingBackgroundColor;
