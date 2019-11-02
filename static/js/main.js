@@ -15,7 +15,6 @@ window.onload = function() {
     if (localStorage['currentlyPlayingIndex']) {
         const index = parseInt(localStorage['currentlyPlayingIndex']);
 
-        console.log(`${index} is the index.`);
         nowPlayingIndex = index;
         audioPlayer.src = `/static/playlist/${songs[nowPlayingIndex].innerText}`;
     } else {
