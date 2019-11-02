@@ -28,6 +28,22 @@ window.onload = function() {
             if ('localStorage' in window && window['localStorage'] !== null) {
                 localStorage['currentlyPlayingIndex'] = nowPlayingIndex;
             }
+
+            /* mediaSession */
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                  title: songs[nowPlayingIndex].innerText,
+                  artist: 'Bollywood Songs',
+                  album: '',
+                  artwork: [],
+                });
+
+                navigator.mediaSession.setActionHandler('play', () => playButton.click());
+                navigator.mediaSession.setActionHandler('pause', () => playButton.click());
+                navigator.mediaSession.setActionHandler('previoustrack', () => previousSong());
+                navigator.mediaSession.setActionHandler('nexttrack', () => nextButton.click());
+            }
+
             audioPlayer.play();
             whiteOut();
             songs[nowPlayingIndex].style.backgroundColor = playingBackgroundColor;
